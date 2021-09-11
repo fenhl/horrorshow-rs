@@ -316,6 +316,9 @@ pub mod prelude;
 
 pub mod helper;
 
+#[cfg(feature = "rocket")]
+pub mod rocket;
+
 /// Helper trait for dispatching `attr ?= `.
 ///
 /// attr ?= Some("test") -> attr="test"

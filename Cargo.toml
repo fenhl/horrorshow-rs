@@ -16,3 +16,7 @@ default = ["ops", "std", "alloc"]
 alloc = []
 ops = []
 std = ["alloc"]
+
+[dependencies.rocket]
+version = "0.5.0-rc.1"
+optional = true
