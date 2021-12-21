@@ -1,5 +1,5 @@
 use {
-    rocket::{
+    dep_rocket_beta::{
         Request,
         http::Status,
         response::{
