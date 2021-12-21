@@ -14,12 +14,14 @@ use {
     },
 };
 
+pub type Result = std::result::Result<Html<String>, Error>;
+
 pub trait TemplateExt {
-    fn write_to_html(self) -> Result<Html<String>, Error>;
+    fn write_to_html(self) -> Result;
 }
 
 impl<T: Template> TemplateExt for T {
-    fn write_to_html(self) -> Result<Html<String>, Error> {
+    fn write_to_html(self) -> Result {
         let mut buf = String::default();
         self.write_to_string(&mut buf)?;
         Ok(Html(buf))
