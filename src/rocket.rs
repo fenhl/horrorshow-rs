@@ -11,8 +11,39 @@ use {
     crate::{
         Template,
         error::Error,
+        prelude::*,
     },
 };
+
+impl<S> RenderOnce for Html<S>
+where
+    S: AsRef<str>,
+{
+    fn render_once(self, tmpl: &mut TemplateBuffer<'_>) {
+        tmpl.write_raw(self.0.as_ref())
+    }
+    fn size_hint(&self) -> usize {
+        self.0.as_ref().len()
+    }
+}
+
+impl<S> RenderMut for Html<S>
+where
+    S: AsRef<str>,
+{
+    fn render_mut(&mut self, tmpl: &mut TemplateBuffer<'_>) {
+        tmpl.write_raw(self.0.as_ref())
+    }
+}
+
+impl<S> Render for Html<S>
+where
+    S: AsRef<str>,
+{
+    fn render(&self, tmpl: &mut TemplateBuffer<'_>) {
+        tmpl.write_raw(self.0.as_ref())
+    }
+}
 
 pub type Result = std::result::Result<Html<String>, Error>;
 
