@@ -59,6 +59,13 @@ impl<T: Template> TemplateExt for T {
     }
 }
 
+impl<'r, F> Responder<'r, 'static> for FnRenderer<F>
+where Self: Render {
+    fn respond_to(self, req: &'r Request<'_>) -> response::Result<'static> {
+        self.write_to_html().respond_to(req)
+    }
+}
+
 impl<'r> Responder<'r, 'static> for Error {
     fn respond_to(self, _: &'r Request<'_>) -> response::Result<'static> {
         eprintln!("error rendering HTML: {:?}", self);
