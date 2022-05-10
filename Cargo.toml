@@ -20,5 +20,5 @@ rocket = ["dep_rocket_beta"]
 
 [dependencies.dep_rocket_beta]
 package = "rocket"
-version = "0.5.0-rc.1"
+version = "0.5.0-rc.2"
 optional = true

@@ -5,7 +5,7 @@ use {
         response::{
             self,
             Responder,
-            content::Html,
+            content::RawHtml,
         },
     },
     crate::{
@@ -15,7 +15,7 @@ use {
     },
 };
 
-impl<S> RenderOnce for Html<S>
+impl<S> RenderOnce for RawHtml<S>
 where
     S: AsRef<str>,
 {
@@ -27,7 +27,7 @@ where
     }
 }
 
-impl<S> RenderMut for Html<S>
+impl<S> RenderMut for RawHtml<S>
 where
     S: AsRef<str>,
 {
@@ -36,7 +36,7 @@ where
     }
 }
 
-impl<S> Render for Html<S>
+impl<S> Render for RawHtml<S>
 where
     S: AsRef<str>,
 {
@@ -45,7 +45,7 @@ where
     }
 }
 
-pub type Result = std::result::Result<Html<String>, Error>;
+pub type Result = std::result::Result<RawHtml<String>, Error>;
 
 pub trait TemplateExt {
     fn write_to_html(self) -> Result;
@@ -55,7 +55,7 @@ impl<T: Template> TemplateExt for T {
     fn write_to_html(self) -> Result {
         let mut buf = String::default();
         self.write_to_string(&mut buf)?;
-        Ok(Html(buf))
+        Ok(RawHtml(buf))
     }
 }
 
